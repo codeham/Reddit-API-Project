@@ -1,6 +1,7 @@
 import praw
 from flask import Flask, jsonify, request
 app = Flask(__name__)
+# sensitive reddit data...
 reddit = praw.Reddit(client_id="",
                     client_secret="",
                     password="",
