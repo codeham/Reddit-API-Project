@@ -1,12 +1,17 @@
 import praw
+import json
 from flask import Flask, jsonify, request
 app = Flask(__name__)
 # sensitive reddit data...
-reddit = praw.Reddit(client_id="",
-                    client_secret="",
-                    password="",
-                    user_agent="",
-                    username="")
+with open('reddit_login.json') as data_file:
+    data = json.load(data_file)
+print (data)
+
+reddit = praw.Reddit(client_id = data["client_id"],
+                    client_secret = data["client_secret"],
+                    password = data["password"],
+                    user_agent = data["user_agent"],
+                    username = data["username"])
 
 # verify authenticated correct user
 print('current reddit user: ' + str(reddit.user.me()))
@@ -15,11 +20,11 @@ print('current reddit user: ' + str(reddit.user.me()))
 def home():
     return "Greetings from the homepage !"
 
-@app.route("/programming/")
+@app.route("/funny/")
 def programming_main():
     return submissions_to_json(request.path)
 
-@app.route("/learnprogramming/")
+@app.route("/me_irl/")
 def learnprogramming_main():
     return submissions_to_json(request.path)
 
@@ -31,7 +36,7 @@ def submissions_to_json(subname):
     trimmed_subname = subname.strip('/')
     subreddit = reddit.subreddit(trimmed_subname)
     all_submissions = {}
-    for index, submission in enumerate(subreddit.top(limit=5)):
+    for index, submission in enumerate(subreddit.hot(limit=5)):
         all_submissions[str(index)] = [{'title': submission.title}, {'url': submission.url}, {"post_num": index}]
     return jsonify({trimmed_subname: all_submissions})
 
