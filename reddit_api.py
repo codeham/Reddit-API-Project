@@ -32,6 +32,10 @@ def learnprogramming_main():
 def cscareerquestions_main():
     return submissions_to_json(request.path)
 
+#img scraper, testing....
+def img_scraper(url, count):
+    request.urlretriever(url, "img_url", + str(count) + ".jpg")
+
 def submissions_to_json(subname):
     trimmed_subname = subname.strip('/')
     subreddit = reddit.subreddit(trimmed_subname)
