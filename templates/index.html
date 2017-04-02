@@ -2,33 +2,58 @@
 <head>
   <meta charset="utf-8">
   <!-- Google Font -->
-  <link href='https://fonts.googleapis.com/css?family=Open+Sans:600italic' rel='stylesheet' type='text/css'>
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Work+Sans" rel="stylesheet">
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <!-- Javascript -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <!-- J Query -->
   <style media="screen">
-    body{
-       font-family: "Open Sans", sans-serif;
-     }
      .header-container{
        font-family: "Open Sans";
+       font-size: 20px;
+       color: black;
+     }
+     .container{
+       font-family: "Work Sans";
+       color: black;
      }
   </style>
-  <title>Reddit Application</title>
+  <title>An API For Reddit</title>
 </head>
 <body>
   <div class="container">
     <div class="row header-container">
-      <h1>Reddit API Caller</h1>
+      <h1>API Caller For Reddit</h1>
     </div>
     <div class="container">
-      <h2>/r/dankmemes :</h2>
+      {% if sub1 %}
+      <h2>/r/{{ sub1 }}:</h2>
+      {% endif %}
       <ul class="list-group">
-        <li class="list-group-item list-group-item-success">First Item</li>
-        <li class="list-group-item list-group-item-info">Second Item</li>
-        <li class="list-group-item list-group-item-warning">Third Item</li>
+        <li class="list-group-item list-group-item-success">First Post</li>
+        <li class="list-group-item list-group-item-info">Second Post</li>
+        <li class="list-group-item list-group-item-danger">Third Post</li>
+      </ul>
+    </div>
+    <div class="container">
+      {% if sub2 %}
+      <h2>/r/{{ sub2 }}:</h2>
+      {% endif %}
+      <ul class="list-group">
+        <li class="list-group-item list-group-item-success">First Post</li>
+        <li class="list-group-item list-group-item-info">Second Post</li>
+        <li class="list-group-item list-group-item-danger">Third Post</li>
+      </ul>
+    </div>
+    <div class="container">
+      {% if sub3 %}
+      <h2>/r/{{ sub3 }}:</h2>
+      {% endif %}
+      <ul class="list-group">
+        <li class="list-group-item list-group-item-success">First Post</li>
+        <li class="list-group-item list-group-item-info">Second Post</li>
+        <li class="list-group-item list-group-item-danger">Third Post</li>
       </ul>
     </div>
   </div>

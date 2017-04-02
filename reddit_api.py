@@ -17,11 +17,12 @@ reddit = praw.Reddit(client_id = data["client_id"],
 print('current reddit user: ' + str(reddit.user.me()))
 
 @app.route("/")
-def home():
-    return render_template("index.html")
+def home(sub1=None, sub2=None, sub3=None):
+    return render_template("index.html", sub1="funny", sub2="me_irl", sub3="cscareerquestions")
 
 @app.route("/funny/")
 def programming_main():
+    home(request.path)
     return submissions_to_json(request.path)
 
 @app.route("/me_irl/")
