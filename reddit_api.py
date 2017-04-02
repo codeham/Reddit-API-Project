@@ -1,6 +1,6 @@
 import praw
 import json
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, render_template, request
 app = Flask(__name__)
 # sensitive reddit data...
 with open('reddit_login.json') as data_file:
@@ -18,7 +18,7 @@ print('current reddit user: ' + str(reddit.user.me()))
 
 @app.route("/")
 def home():
-    return "Greetings from the homepage !"
+    return render_template("index.html")
 
 @app.route("/funny/")
 def programming_main():
@@ -41,6 +41,7 @@ def submissions_to_json(subname):
     subreddit = reddit.subreddit(trimmed_subname)
     all_submissions = {}
     for index, submission in enumerate(subreddit.hot(limit=5)):
+        img_scraper(submission.url, index)
         all_submissions[str(index)] = [{'title': submission.title}, {'url': submission.url}, {"post_num": index}]
     return jsonify({trimmed_subname: all_submissions})
 
