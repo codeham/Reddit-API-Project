@@ -33,15 +33,14 @@ def cscareerquestions_main():
     return submissions_to_json(request.path)
 
 #img scraper, testing....
-def img_scraper(url, count):
-    request.urlretriever(url, "img_url", + str(count) + ".jpg")
+# def img_scraper(url, count):
+#     # request.urlretriever(url, "img_url", + str(count) + ".jpg")
 
 def submissions_to_json(subname):
     trimmed_subname = subname.strip('/')
     subreddit = reddit.subreddit(trimmed_subname)
     all_submissions = {}
     for index, submission in enumerate(subreddit.hot(limit=5)):
-        img_scraper(submission.url, index)
         all_submissions[str(index)] = [{'title': submission.title}, {'url': submission.url}, {"post_num": index}]
     return jsonify({trimmed_subname: all_submissions})
 
